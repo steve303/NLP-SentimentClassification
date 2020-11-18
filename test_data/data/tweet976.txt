@@ -1,0 +1,1 @@
+@USER @USER Original Mac was resource limited to the point that you had to use the toolbox managers : there wasn ’ t space to write your own . Back then , programmers actively resented Apple for not giving them enougn to do their own mouse & window handling . Etc .

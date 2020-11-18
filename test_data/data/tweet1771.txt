@@ -1,0 +1,1 @@
+@USER @USER Well then , we need to make them static . And every other bit of nuisance non-static environment .
