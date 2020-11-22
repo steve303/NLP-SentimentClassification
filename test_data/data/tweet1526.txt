@@ -1,1 +1,0 @@
-@USER @USER I used VBA for excel to make the 3270 emulator do the things the actual mainframe programmers couldn't even understand . That was a decade ago , now I'm a COBOL developer

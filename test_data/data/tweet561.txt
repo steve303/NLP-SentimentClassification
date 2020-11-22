@@ -1,1 +1,0 @@
-@USER @USER @USER Apparently when 1M / 2M go backward below 15 vol you sell long dated vega into the ground ... seems easy to close if you are a buyer . JIC its missed
