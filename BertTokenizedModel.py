@@ -9,6 +9,7 @@ import re
 import random
 import math
 from TEXT_MODEL import TEXT_MODEL
+from TEXT_PREPROCESSING import preprocess_text
 
 # LOADING DATA
 categorized_tweets = pd.read_json('./data/train.jsonl', lines = True)
@@ -16,15 +17,6 @@ categorized_tweets.isnull().values.any()
 print(categorized_tweets)
 
 # PREPROCESSING DATA
-def preprocess_text(input_data):
-    data = input_data 
-
-    # Removing tags
-    #data = tf.strings.regex_replace(input_data, "@USER", " ")
-    #data = tf.strings.regex_replace(data, "<URL>", " ")
-    
-    return data
-
 tweets = []
 data = list(categorized_tweets["response"])
 print(data[0])
@@ -106,14 +98,19 @@ processed_dataset = tf.data.Dataset.from_generator(lambda:tokenized_un_tweets, o
 batched_dataset = processed_dataset.padded_batch(BATCH_SIZE, padded_shapes=(None, ))
 
 predictions = text_model.predict(batched_dataset)
-print(str(len(predictions)))
 
 with open('answer.txt', 'w') as f:
     c = 1
+    s_c = 0
+    ns_c = 0
     for p in predictions:
         if p >= .5:
             f.write("twitter_" + str(c) + "," + "SARCASM\n")
             c += 1
+            s_c += 1
         else:
             f.write("twitter_" + str(c) + "," + "NOT_SARCASM\n")
             c += 1
+            ns_c += 1
+print("# sarcasm: " + str(s_c))
+print("# not sarcasm: " + str(ns_c))
