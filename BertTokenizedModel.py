@@ -52,13 +52,9 @@ processed_dataset = tf.data.Dataset.from_generator(lambda: sorted_tweet_labels, 
 BATCH_SIZE = 32
 batched_dataset = processed_dataset.padded_batch(BATCH_SIZE, padded_shapes=((None, ), ()))
 next(iter(batched_dataset))
-
-# divide into test and train
 TOTAL_BATCHES = math.ceil(len(sorted_tweet_labels) / BATCH_SIZE)
-TEST_BATCHES = TOTAL_BATCHES // 10
 batched_dataset.shuffle(TOTAL_BATCHES)
-test_data = batched_dataset.take(TEST_BATCHES)
-train_data = batched_dataset.skip(TEST_BATCHES)
+
 
 # BUILD MODEL
 # Model hyperparameters
@@ -82,7 +78,7 @@ text_model = TEXT_MODEL(vocabulary_size=VOCAB_LENGTH,
 text_model.compile(loss="binary_crossentropy", optimizer="adam", metrics=["accuracy"])
 
 # Fit model
-text_model.fit(train_data, epochs=NB_EPOCHS)
+text_model.fit(batched_dataset, epochs=NB_EPOCHS)
 
 # Predict using model
 uncat_tweets = pd.read_json('./data/test.jsonl', lines = True)
