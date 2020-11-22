@@ -33,14 +33,14 @@ vocabulary_file = bert_layer.resolved_object.vocab_file.asset_path.numpy()
 to_lower_case = bert_layer.resolved_object.do_lower_case.numpy()
 tokenizer = BertTokenizer(vocabulary_file, to_lower_case)
 
-# tokenized example
-print(tweets[0])
-print(tokenizer.tokenize(tweets[0]))
-
 def tokenize_tweets(data):
     return tokenizer.convert_tokens_to_ids(tokenizer.tokenize(data))
 
 tokenized_tweets = [tokenize_tweets(tweet) for tweet in tweets]
+
+# tokenized example
+print(tweets[9])
+print(tokenizer.tokenize(tweets[9]))
 
 # PREPARE FOR TRAINING
 tweets_with_len = [[tweet, y[i], len(tweet)] for i, tweet in enumerate(tokenized_tweets)]
@@ -64,7 +64,7 @@ CNN_FILTERS = 100
 DNN_UNITS = 256
 OUTPUT_CLASSES = 2
 DROPOUT_RATE = 0.2
-NB_EPOCHS = 10
+NB_EPOCHS = 20
 
 # Model object
 text_model = TEXT_MODEL(vocabulary_size=VOCAB_LENGTH,
