@@ -13,6 +13,7 @@ def preprocess_text(input_data):
     data = emoji.demojize(data, delimiters=(" ", " "))
 
     # Remove stopwords
-    # no_stop = [w for w in data if not w in stopwords.words()]
-    # data = (" ").join(no_stop)
+    stop_words = set(stopwords.words("english"))
+    no_stop = [w for w in data if not w in stop_words]
+    data = (" ").join(no_stop)
     return data
