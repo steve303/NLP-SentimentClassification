@@ -1,7 +1,11 @@
 import emoji
 import nltk
 from nltk.corpus import stopwords
+from nltk.tokenize import word_tokenize 
 nltk.download('stopwords')
+nltk.download('punkt')
+import string
+import re
 def preprocess_text(input_data):
     data = input_data 
 
@@ -14,6 +18,14 @@ def preprocess_text(input_data):
 
     # Remove stopwords
     stop_words = set(stopwords.words("english"))
-    no_stop = [w for w in data if not w in stop_words]
-    data = (" ").join(no_stop)
+    word_tokens = word_tokenize(data) 
+    data = []
+    for w in word_tokens:
+        if w not in stop_words:
+            data.append(w)
+    data = str(data)
+
+    # Remove non alpha-numeric characters (not sure if a good idea)
+    data = re.sub('[^\w\s]', '', data)
+
     return data
