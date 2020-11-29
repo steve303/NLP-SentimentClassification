@@ -14,14 +14,15 @@ def preprocess_text(input_data):
     #data = tf.strings.regex_replace(data, "<URL>", " ")
 
     # Process emojis
-    data = emoji.demojize(data, delimiters=(" ", " "))
+    #data = emoji.demojize(data, delimiters=(" ", " "))
 
-    # Remove stopwords
+    # Remove stopwords (And emojis)
     stop_words = set(stopwords.words("english"))
+    emojis = set(emoji.UNICODE_EMOJI_ALIAS)
     word_tokens = word_tokenize(data) 
     data = []
     for w in word_tokens:
-        if w not in stop_words:
+        if w not in stop_words and w not in emojis:
             data.append(w)
     data = str(data)
 
