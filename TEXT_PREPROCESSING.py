@@ -24,9 +24,9 @@ def preprocess_text(input_data):
     for w in word_tokens:
         if w not in stop_words and w not in emojis:
             data.append(w)
-    data = str(data)
+    data = (" ").join(data)
 
     # Remove non alpha-numeric characters (not sure if a good idea)
-    data = re.sub('[^\w\s]', '', data)
+    data = re.sub(r'[^\w'+' .'+']', '', data)
 
     return data
