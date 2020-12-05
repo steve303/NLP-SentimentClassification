@@ -17,6 +17,7 @@ def preprocess_text(input_data):
     #data = emoji.demojize(data, delimiters=(" ", " "))
 
     # Remove stopwords (And emojis)
+    """
     stop_words = set(stopwords.words("english"))
     emojis = set(emoji.UNICODE_EMOJI_ALIAS)
     word_tokens = word_tokenize(data) 
@@ -28,5 +29,5 @@ def preprocess_text(input_data):
 
     # Remove non alpha-numeric characters (not sure if a good idea)
     data = re.sub(r'[^\w'+' .'+']', '', data)
-
+    """
     return data
