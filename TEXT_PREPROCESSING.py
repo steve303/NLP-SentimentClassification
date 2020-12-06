@@ -16,18 +16,18 @@ def preprocess_text(input_data):
     # Process emojis
     #data = emoji.demojize(data, delimiters=(" ", " "))
 
-    # Remove stopwords (And emojis)
-    """
+    # Remove stopwords/emojis
     stop_words = set(stopwords.words("english"))
     emojis = set(emoji.UNICODE_EMOJI_ALIAS)
     word_tokens = word_tokenize(data) 
     data = []
     for w in word_tokens:
-        if w not in stop_words and w not in emojis:
+        # Modify below for stopwords and/or emojis
+        if w not in emojis:
             data.append(w)
     data = (" ").join(data)
 
     # Remove non alpha-numeric characters (not sure if a good idea)
-    data = re.sub(r'[^\w'+' .'+']', '', data)
-    """
+    #data = re.sub(r'[^\w'+' .'+']', '', data)
+   
     return data
